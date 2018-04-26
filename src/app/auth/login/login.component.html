@@ -1,0 +1,48 @@
+<p class="text-xs-center">Войдите для работы</p>
+<div *ngIf="message.text"
+    class="alert alert-{{ message.type }}"
+    >{{ message.text }}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group"
+    [ngClass]="{ 'has-error': form.get('email').invalid && form.get('email').touched }"
+    >
+        <label for="email">Email</label>
+        <input
+            type="text"
+            class="form-control underlined"
+            id="email"
+            placeholder="Введите ваш email"
+            formControlName="email"
+        >
+        <span class="form-help-text"
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+        >Введите корректный email
+        </span>
+    </div>
+    <div class="form-group"
+    [ngClass]="{ 'has-error': form.get('password').invalid && form.get('password').touched }"
+    >
+        <label for="password">Пароль</label>
+        <input
+            type="password"
+            class="form-control underlined"
+            id="password"
+            placeholder="Пароль"
+            formControlName="password"
+        >
+        <span class="form-help-text"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+        >Пароль не может быть меньше пяти символов</span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary" 
+       [disabled]="form.invalid"
+        >Войти</button>
+    </div>
+    <div class="form-group">
+        <p class="text-muted text-xs-center">
+            Нет аккаунта? <a [routerLink]="'/registration'">Зарегистрироваться!</a>
+        </p>
+    </div>
+</form>
